@@ -12,7 +12,7 @@
 #' regenerate_img(0104, polar = FALSE)
 #' @importFrom purrr map
 
-regenerate_img <- function(seed_to_recreate, filetype = "png", polar = FALSE) {
+regenerate_img <- function(seed_to_recreate, filetype = "png", polar = FALSE, ...) {
   formula <- get_formula_from_logfile(seed_to_recreate, filetype)
   seeds <- get_seed_from_logfile(seed_to_recreate)
   purrr::map(seeds, function(seed){
@@ -21,6 +21,6 @@ regenerate_img <- function(seed_to_recreate, filetype = "png", polar = FALSE) {
     logfile <- check_logfile_existence()
     logfile <- generate_logfile_entry(logfile, formula, seed, file_name)
     df <- generate_data(formula)
-    plot <- generate_plot(df, file_name, polar, filetype)
+    plot <- generate_plot(df, file_name, polar, filetype, ...)
   })
 }
